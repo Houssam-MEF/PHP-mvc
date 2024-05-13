@@ -1,5 +1,4 @@
 
-
 <center>
 <h1>la liste des produits</h1>
 <table border="1" width="430">

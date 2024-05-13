@@ -1,31 +1,41 @@
 
-<?php
-session_start();
-$visiteurs=$_SESSION['visiteurs'];
-
-?>
-
 <center>
-<h1>la liste des visiteurs</h1>
+<h1>La liste des Commandes</h1>
 <table border="1" width="430">
     <tr>
         <th>ID</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th colspan="2"><a href="../Gestion_Actions/Visiteur.php?action=form_ajout">Ajouter</a></th>
+        <th>Visiteur</th>
+        <th>Produits</th>
+        <th>Quantite</th>
+        <th colspan="2"><a href="?GAction=commande&action=form_ajout">Ajouter</a></th>
     </tr>
 <?php
-foreach($visiteurs as $V)
+foreach($commandes as $C)
 {
 ?>
     <tr>
-        <td><?=$V[0]?></td>
-        <td><?=$V[1]?></td>
-        <td><?=$V[2]?></td>
-        <td><?=$V[3]?></td>
-        <td><a href="../Gestion_Actions/Visiteur.php?action=supprimer&id=<?=$V[0]?>">Sup</a></td>
-        <td><a href="../Gestion_Actions/Visiteur.php?action=form_edit&id=<?=$V[0]?>">Edit</a></td>
+        <td><?=$C[0]?></td>
+        <td>
+            <?php
+            foreach($visiteurs as $V) {
+                if($V[0] == $C[1]) {
+                    echo $V[1] . " " . $V[2];
+                }
+            }
+            ?>
+        </td>
+        <td>
+            <?php
+            foreach($produits as $P) {
+                if($P[0] == $C[2]) {
+                    echo $P[1];
+                }
+            }
+            ?>
+        </td>
+        <td><?=$C[3]?></td>
+        <td><a href="?GAction=commande&action=supprimer&id=<?=$C[0]?>">Sup</a></td>
+        <td><a href="?GAction=commande&action=form_edit&id=<?=$C[0]?>">Edit</a></td>
     </tr>
 <?php
 }

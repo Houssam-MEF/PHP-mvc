@@ -1,41 +1,48 @@
 <?php
 
-include_once 'Acces_BD/Produit.php';
+include_once 'Acces_BD/Commande.php';
+include_once 'Acces_BD/Gestion_Commande.php';
+include_once 'Acces_BD/Gestion_Visiteur.php';
 include_once 'Acces_BD/Gestion_Produit.php';
 
+$GC = new Gestion_Commande();
+$GV = new Gestion_Visiteur();
 $GP = new Gestion_Produit();
+
+$commandes = $GC->Lister();
+$visiteurs = $GV->Lister();
 $produits = $GP->Lister();
 
 switch ($action)
 {
     case "form_ajout":
-        include_once('IHM/produit/form_saisie.php');
+        include_once('IHM/commande/form_saisie.php');
         break;
     
     case "form_edit":
-        $P=$GP->Rechercher($_GET['id'])[0];
-        include_once('IHM/produit/form_edit.php');
+        $C = $GC->Rechercher($_GET['id'])[0];
+        include_once('IHM/commande/form_edit.php');
         break;
 
     case "ajouter":
-        [$id, $libelle, $prix, $stock] = [0, $_POST['libelle'], $_POST['prix'], $_POST['stock']];
-        $GP->Ajouter(new Produit($id, $libelle, $prix, $stock));
-        header('Location: ?GAction=produit');
+        [$id, $visiteur, $produit, $quantite] = [0, $_POST['visiteur'], $_POST['produit'], $_POST['quantite']];
+        $GC->Ajouter(new Commande($id, $visiteur, $produit, $quantite));
+        header('Location: ?GAction=commande');
         break;
         
     case "modifier":
-        [$id, $libelle, $prix, $stock] = [$_POST['id'], $_POST['libelle'], $_POST['prix'], $_POST['stock']];
-        $GP->Modifier(new Produit($id, $libelle, $prix, $stock));
-        header('Location: ?GAction=produit');
+        [$id, $visiteur, $produit, $quantite] = [$_POST['id'], $_POST['visiteur'], $_POST['produit'], $_POST['quantite']];
+        $GC->Modifier(new Commande($id, $visiteur, $produit, $quantite));
+        header('Location: ?GAction=commande');
         break;
 
     case "supprimer":
-        $GP->Supprimer($_GET['id']);
-        header('Location: ?GAction=produit');
+        $GC->Supprimer($_GET['id']);
+        header('Location: ?GAction=commande');
         break;
 
     default :
-        include_once('IHM/produit/affichage.php');
+        include_once('IHM/commande/affichage.php');
 
 
 }

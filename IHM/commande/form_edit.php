@@ -1,23 +1,41 @@
-  <?php
-    session_start();
-    $V=$_SESSION['visiteur'];
-    ?>
 <center>
-    <h1>Modifier un visiteur</h1>
-    <form action="../Gestion_Actions/Visiteur.php?action=modifier" method="post">
-        <input type="hidden" name="id" value="<?=$V[0]?>">
+    <h1>Modifier une Commande</h1>
+    <form action="?GAction=commande&action=modifier" method="post">
+        <input type="hidden" name="id" value="<?=$C[0]?>">
      <table>
         <tr>
-            <td>Nom</td>
-            <td><input type="text" name="nom" value="<?=$V[1]?>"></td>
+            <td>Visiteur</td>
+            <td>
+
+                <select name="visiteur" id="" value="<?=$C[1]?>">
+                    <?php
+                        foreach ($visiteurs as $key => $value) {
+                    ?>
+                    <option value="<?=$value['id']?>"><?=$value['nom'] . " " . $value['prenom']?></option>
+                    <?php
+                        }
+                    ?>
+                </select>
+            </td>
         </tr>
         <tr>
-            <td>Prénom</td>
-            <td><input type="text" name="prenom" value="<?=$V[2]?>"></td>
+            <td>Produit</td>
+            <td>
+
+                <select name="produit" id="" value="<?=$C[2]?>">
+                    <?php
+                        foreach ($produits as $key => $value) {
+                    ?>
+                    <option value="<?=$value['id']?>"><?=$value['libelle']?></option>
+                    <?php
+                        }
+                    ?>
+                </select>
+            </td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td><input type="email" name="email" value="<?=$V[3]?>"></td>
+            <td>Quantite</td>
+            <td><input type="number" name="quantite" id="" value="<?=$C[3]?>"></td>
         </tr>
         <tr>
             <td><input type="submit" value="Envoyer"></td>

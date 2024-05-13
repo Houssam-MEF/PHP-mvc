@@ -1,18 +1,40 @@
 <center>
-    <h1>Ajouter un visiteur</h1>
-    <form action="../Gestion_Actions/Visiteur.php?action=ajouter" method="post">
+    <h1>Ajouter une Commande</h1>
+    <form action="?GAction=commande&action=ajouter" method="post">
      <table>
         <tr>
-            <td>Nom</td>
-            <td><input type="text" name="nom" id=""></td>
+            <td>Visiteur</td>
+            <td>
+
+                <select name="visiteur" id="">
+                    <?php
+                        foreach ($visiteurs as $h1 => $val1) {
+                    ?>
+                    <option value="<?=$val1['id']?>"><?=$val1['nom'] . " " . $val1['prenom']?></option>
+                    <?php
+                        }
+                    ?>
+                </select>
+            </td>
         </tr>
         <tr>
-            <td>Prénom</td>
-            <td><input type="text" name="prenom" id=""></td>
+            <td>Produit</td>
+            <td>
+
+                <select name="produit" id="">
+                    <?php
+                        foreach ($produits as $k2 => $val2) {
+                    ?>
+                    <option value="<?=$val2['id']?>"><?=$val2['libelle']?></option>
+                    <?php
+                        }
+                    ?>
+                </select>
+            </td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td><input type="email" name="email" id=""></td>
+            <td>Quantite</td>
+            <td><input type="number" name="quantite" id=""></td>
         </tr>
         <tr>
             <td><input type="submit" value="Envoyer"></td>
